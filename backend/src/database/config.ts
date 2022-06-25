@@ -1,6 +1,10 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 export default {
-  user: 'root',
-  pass: 'ary123456',
+  user: process.env.MONGO_USER,
+  pass: process.env.MONGO_PASSWORD,
   autoIndex: false,
-  dbName: 'my-mongo',
+  dbName: process.env.MONGO_DB_CONTAINER,
 };
