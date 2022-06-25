@@ -5,7 +5,6 @@
   "main": "./src/server.ts",
   "private": "true",
   "scripts": {
-    "build": "/bin/sh tsc_eval.sh",
     "test": "mocha -r ts-node/register ./src/tests/*$NAME*.{test,spec}.ts -t 10000 --exit",
     "start": "ts-node-dev ./src/server.ts",
     "startNodemon": "nodemon --watch \"./src/**\" ./src/server.ts"
