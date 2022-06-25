@@ -2,19 +2,26 @@
   "name": "ebytr",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "./src/server.ts",
+  "private": "true",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "build": "/bin/sh tsc_eval.sh",
+    "test": "mocha -r ts-node/register ./src/tests/*$NAME*.{test,spec}.ts -t 10000 --exit",
+    "start": "ts-node-dev ./src/server.ts",
+    "startNodemon": "nodemon --watch \"./src/**\" ./src/server.ts"
+  },
+  "author": {
+    "name": "Ary Barbosa",
+    "email": "aryhertonbarbosa@gmail.com",
+    "url": "https://github.com/aryherton"
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "devDependencies": {
     "typescript": "^4.7.4"
   },
   "dependencies": {
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "mongoose": "^6.4.0"
   }
