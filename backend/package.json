@@ -6,8 +6,9 @@
   "private": "true",
   "scripts": {
     "test": "mocha -r ts-node/register ./src/tests/*$NAME*.{test,spec}.ts -t 10000 --exit",
-    "start": "ts-node-dev ./src/server.ts",
-    "startNodemon": "nodemon --watch \"./src/**\" ./src/server.ts"
+    "start": "ts-node ./src/server.ts",
+    "startNodemon": "nodemon --watch \"./src/**\" ./src/server.ts",
+    "dev":"nodemon --watch \"./src/**\" --ext \"ts,json\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node src/server.ts\""
   },
   "author": {
     "name": "Ary Barbosa",
