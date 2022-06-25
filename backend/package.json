@@ -21,6 +21,7 @@
     "@types/chai-http": "^4.2.0",
     "@types/mocha": "^9.1.1",
     "@types/sinon": "^10.0.11",
+    "mocha": "^10.0.0",
     "typescript": "^4.7.4"
   },
   "dependencies": {
