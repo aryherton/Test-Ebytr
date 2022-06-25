@@ -1,29 +1,29 @@
 import mongoose from 'mongoose';
 
 import UsersSchemas from '../schemas/users';
-import IUsers from '../interface/IUsers';
+import IUser from '../interface/IUser';
 import users from '../schemas/users';
 
-// export default model<IUsers[]>('EBYTR', UsersSchemas);
+// export default model<IUser[]>('EBYTR', UsersSchemas);
 
 export default class UserModel {
   constructor(
     private model = mongoose.model('users', UsersSchemas)
   ){}
 
-  async create(user: IUsers): Promise<IUsers & { _id: mongoose.Types.ObjectId }>{
+  async create(user: IUser): Promise<IUser & { _id: mongoose.Types.ObjectId }>{
     return this.model.create(user);
   }
 
-  async getAll(): Promise<IUsers[]> {
+  async getAll(): Promise<IUser[]> {
     return this.model.find();
   }
 
-  async getByEmail(email: string): Promise<(IUsers & { _id: mongoose.Types.ObjectId }) | unknown> {
+  async getByEmail(email: string): Promise<(IUser & { _id: mongoose.Types.ObjectId }) | unknown> {
     return this.model.find({ email });
   }
 
-//   async updateMessage(email: string, user: Partial<IUsers>): Promise<void> {
+//   async updateMessage(email: string, user: Partial<IUser>): Promise<void> {
 //     await this.model.updateOne({ email }, user);
 //   }
 }
