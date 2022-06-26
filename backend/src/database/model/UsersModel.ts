@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 
 import UsersSchemas from '../schemas/users';
 import IUser from '../interface/IUser';
-import users from '../schemas/users';
 
 export default class UsersModel {
   constructor(
