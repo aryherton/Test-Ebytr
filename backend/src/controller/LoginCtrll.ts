@@ -9,13 +9,15 @@ export default class LoginCtrll {
 
   createLogin = async (req: Request, res: Response): Promise<Response> => {
     try {
-      if (req.body) {
-      const user = await this.userSerc.insertUser(req.body);
+      const { name, email, password } = req.body;
+      const checkEmail = await this.userSerc.getUserByEmail(email);
 
-      return res.status(StatusHttp.OK).json({ message: MessagesRes.LOGIN_SUCCESS });
+      if (checkEmail.length) {
+        return res.status(StatusHttp.UNAUTHORIZED).json({ message: MessagesRes.ALREADY_REGISTERED });
       }
+      const token = await this.userSerc.insertUser({ name, email, password });
 
-      return res.status(StatusHttp.NOT_FOUND).json({ message: MessagesRes.BODY_IS_REQUIRED });
+      return res.status(StatusHttp.CREATED).json({ message: MessagesRes.LOGIN_SUCCESS, token });
     } catch(e) {
       console.log(e);
       return res.status(StatusHttp.SERVER_ERROR).json({ message: MessagesRes.ERROR_SERVER });
@@ -24,9 +26,12 @@ export default class LoginCtrll {
 
  checkLogin =  async (req: Request, res: Response): Promise<Response> => {
     try {
-      if (req.body) {
-        const checkUser = await this.userSerc.validUser(req.body);
-      }
+        const { email, password } = req.body;
+        const token = await this.userSerc.validUser(email, password);
+
+        if (token) {
+          return res.status(StatusHttp.OK).json({ message: MessagesRes.LOGIN_SUCCESS, token });
+        }
 
       return res.status(StatusHttp.NOT_FOUND).json({ message: MessagesRes.BODY_IS_REQUIRED });
     } catch(e) {
