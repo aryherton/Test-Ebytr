@@ -26,7 +26,9 @@ export default class User {
   }
 
   async validUser(email: string, password: string): Promise<string | undefined> {
-      const data = await this.getUserByEmail(email);
+    const data = await this.getUserByEmail(email);
+
+    if (data.length) {
       const pswd = data[0].password;
       const checkPswd = await bcrypt.compare(password, pswd);
 
@@ -34,6 +36,7 @@ export default class User {
         const token = this.getToken(email, password);
         return token as string;
       }
+    }
   }
 
   private getToken(email: string, password: string): string {
