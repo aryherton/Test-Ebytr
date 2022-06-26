@@ -8,7 +8,7 @@
     "test": "mocha -r ts-node/register ./src/tests/*$NAME*.{test,spec}.ts -t 10000 --exit",
     "start": "ts-node ./src/server.ts",
     "startNodemon": "nodemon --watch \"./src/**\" ./src/server.ts",
-    "dev":"nodemon --watch \"./src/**\" --ext \"ts,json\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node src/server.ts\""
+    "dev": "nodemon --watch \"./src/**\" --ext \"ts,json\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node src/server.ts\""
   },
   "author": {
     "name": "Ary Barbosa",
@@ -33,9 +33,11 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
+    "@types/jsonwebtoken": "^8.5.8",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "joi": "^17.6.0",
     "mongoose": "^6.4.0"
   }
 }
