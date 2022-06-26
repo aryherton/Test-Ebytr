@@ -1,9 +1,11 @@
 import { Router } from "express";
+
 import LoginCtrll from '../controller/LoginCtrll';
+import ValidLogin from '../middlewares/ValidLoginMidd';
 
 const ctrll = new LoginCtrll();
 const router = Router();
 
 export default router
-  .get('/', ctrll.checkLogin)
-  .post('/', ctrll.createLogin);
+  .get('/', ValidLogin.validLoginBody, ctrll.checkLogin)
+  .post('/', ValidLogin.validLoginRegister, ctrll.createLogin);
