@@ -10,4 +10,4 @@ FROM node:16-alpine
 
  EXPOSE 3005
 
- CMD ["npm", "run", "startNodemon"]
+ CMD ["npm", "run", "dev"]
