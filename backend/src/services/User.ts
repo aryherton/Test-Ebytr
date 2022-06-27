@@ -47,6 +47,6 @@ export default class User {
   }
 
   async updateUser(email: string, user: IUser): Promise<void> {
-    await this.userModel.update(email, user);
+    await this.userModel.updateUser(email, user);
   }
 }
