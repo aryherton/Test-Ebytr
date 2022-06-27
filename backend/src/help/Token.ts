@@ -4,13 +4,15 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export default class Token {
-  private _email: string;
-  private _password: string;
+  private _email?: string;
+  private _password?: string;
   private _secretKey: string = process.env.SECRET_KEY || 'ebytrKey';
 
-  constructor(email: string, password: string) {
-    this._email = email;
-    this._password = password;
+  constructor(email?: string, password?: string) {
+    if (email && password) {
+      this._email = email;
+      this._password = password;
+    }
   }
 
   createdToken = () => {
@@ -29,5 +31,9 @@ export default class Token {
         console.log('Class Token :', error.message);
       }
     }
-  };
+  }
+
+  validToken = (token: string) => {
+    return jwt.verify(token, this._secretKey);
+  }
 }
