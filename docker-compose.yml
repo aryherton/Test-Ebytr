@@ -22,7 +22,7 @@ services:
   #   restart: 'always'
   #   ports:
   #     - 3005:3005
-  #   command: npm run startNodemon 
+  #   # command: npm run dev
   #   volumes:
   #     - './backend/src:/app/src'
   #   depends_on:
@@ -35,7 +35,7 @@ services:
   #     - DB_USER='${MONGO_USER}'
   #     - DB_PASS='${MONGO_PASSWORD}'
   #     - DB_HOST='${MONGO_URI}'
-  #     - DB_NAME=EBYTR
+  #     - DB_NAME=Ebytr
   #     - DB_PORT=27017
   #   healthcheck:
   #     test: ["CMD", "lsof", "-t", "-i:3005"] # Caso utilize outra porta interna para o back, altere ela aqui também
@@ -53,6 +53,11 @@ services:
       - MONGO_USER='${MONGO_USER}'
       - MONGO_PASSWORD='${MONGO_PASSWORD}'
     restart: 'always'
+    healthcheck:
+      test: echo 'db.stats().ok' | mongo localhost:27017 --quiet
+      interval: 5s
+      timeout: 5s
+      retries: 12
 
     cap_add:
       - SYS_NICE # Deve omitir alertas menores
