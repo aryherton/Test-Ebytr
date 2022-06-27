@@ -1,10 +1,10 @@
 import UsersModel from '../database/model/UsersModel';
-import IUser from '../database/interface/IUser';
+import IMessage from '../database/interface/IMessage';
 
 export default class Message {
   constructor(private userModel = new UsersModel()){}
 
- async setMessage(email: string, user: Partial<IUser>) {
-  await this.userModel.update(email, user);
+ async setMessage(email: string, arrMessage: IMessage[]) {
+  await this.userModel.updateMessage(email, arrMessage);
  }
 }
