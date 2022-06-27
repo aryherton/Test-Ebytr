@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 import UsersSchemas from '../schemas/users';
 import IUser from '../interface/IUser';
+import IMessage from '../interface/IMessage';
 
 export default class UsersModel {
   constructor(
@@ -20,7 +21,11 @@ export default class UsersModel {
     return this.model.find({ email });
   }
 
-  async update(email: string, user: Partial<IUser>): Promise<void> {
+  async updateMessage(email: string, arrMessage: IMessage[]): Promise<void> {
+    await this.model.updateOne({ email }, { arrMessage });
+  }
+
+  async updateUser(email: string, user: IUser): Promise<void> {
     await this.model.updateOne({ email }, { ...user });
   }
 
