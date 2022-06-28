@@ -1,9 +1,16 @@
-function App() {
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import Home from './pages/Home';
+import LoginAndRegist from './pages/LoginAndRegist';
+
+export default function App() {
   return (
-    <div className="App">
-      <h1> EBYTR  </h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" elemet={<LoginAndRegist />} ></Route>
+        <Route exact path="/" elemet={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;
