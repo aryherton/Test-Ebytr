@@ -3,27 +3,18 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const SECRET_KEY = process.env.SECRET_KEY || 'ebytrKey';
+
 export default class Token {
-  private _email?: string;
-  private _password?: string;
-  private _secretKey: string = process.env.SECRET_KEY || 'ebytrKey';
-
-  constructor(email?: string, password?: string) {
-    if (email && password) {
-      this._email = email;
-      this._password = password;
-    }
-  }
-
-  createdToken = () => {
+  static createdToken = (email: string, password: string) => {
     try {
       return jwt
         .sign(
           {
-            email: this._email,
-            password: this._password,
+            email,
+            password,
           },
-          this._secretKey,
+          SECRET_KEY,
           { expiresIn: '31d' },
         );
     } catch (error: unknown) {
@@ -33,7 +24,7 @@ export default class Token {
     }
   }
 
-  validToken = (token: string) => {
-    return jwt.verify(token, this._secretKey);
+  static validToken = (token: string) => {
+    return jwt.verify(token, SECRET_KEY);
   }
 }
