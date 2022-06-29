@@ -1,5 +1,6 @@
 const URL = {
-  LOGIN_AND_REGISTER: 'http://localhost:3005/login',
+  ENDPOINT_LOGIN_AND_REGIST: '/login',
+  ENDPOINT_MESSAGE: '/message',
 };
 
 export default URL;
