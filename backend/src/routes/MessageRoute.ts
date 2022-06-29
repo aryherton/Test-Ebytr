@@ -5,4 +5,6 @@ import MessageCtrll from '../controller/MessageCtrll';
 const ctrll = new MessageCtrll();
 const router = Router();
 
-export default router.post('/', ctrll.setMessageCtrll);
+export default router
+  .get('/', ctrll.getMessageCtrll)
+  .post('/', ctrll.setMessageCtrll);
