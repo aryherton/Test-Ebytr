@@ -18,8 +18,7 @@ export default class MessageCtrll {
         const message: IMessage = req.body.message;
         
         if (authorization) {
-          const token = new Token();
-          const user = token.validToken(authorization) as JwtPayload;
+          const user = Token.validToken(authorization) as JwtPayload;
           const messageServ = new MessageServ();
           const buildArrMess = new BuildArrMessagens();
           const arrMessage: IMessage[] = await buildArrMess
@@ -34,6 +33,24 @@ export default class MessageCtrll {
     } catch(e) {
         console.log(e);
         return res.status(StatusHttp.SERVER_ERROR).json({ message: Messages.ERROR_SERVER });
+    }
+  }
+
+  async getMessageCtrll(req: Request, res: Response) {
+    try {
+      const { authorization } = req.headers;
+
+      if (authorization) {
+        const user = Token.validToken(authorization) as JwtPayload;
+        const messageServ = new MessageServ();
+        const arrMessage = await messageServ.getMessage(user.email);
+
+        return res.status(StatusHttp.OK).json({ arrMessage });
+      }
+
+      return res.status(StatusHttp.OK).json({ message: Messages.NOT_TOKEN });
+    } catch(e) {
+      console.log(e);
     }
   }
 }
