@@ -40,8 +40,7 @@ export default class User {
   }
 
   private getToken(email: string, password: string): string {
-    const classToken = new Token(email, password);
-    const token = classToken.createdToken();
+    const token = Token.createdToken(email, password);
 
     return token as string;
   }
