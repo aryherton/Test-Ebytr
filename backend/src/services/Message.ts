@@ -7,4 +7,10 @@ export default class Message {
  async setMessage(email: string, arrMessage: IMessage[]) {
   await this.userModel.updateMessage(email, arrMessage);
  }
+
+ async getMessage(email: string) {
+  const [ user ] = await this.userModel.getByEmail(email);
+  
+  return user.arrMessage;
+ }
 }
