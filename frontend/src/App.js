@@ -3,24 +3,15 @@ import React, { useEffect } from 'react';
 
 import Home from './pages/Home';
 // import LoginAndRegist from './pages/LoginAndRegist';
-import { fetchRegister } from './services/fetch';
+import Api from './services/api';
+import Url from './help/URL'
 
 export default function App() {
   useEffect(() => {
-    const fetchRegister = async (name, email, password) => {
-      await fetch(URL, {
-        method: 'Post',
-        body: JSON.stringify(
-            name,
-            email,
-            password,
-        )
-      })
-      .then((data) => console.log(data))
-      .then((user) => console.log(user))
-      .catch((err) => console.log(err));
-    fetchRegister('Barbosa', 'barbosa@test.com', '1234567');
-    }}, []);
+    Api
+      .post(Url.ENDPOINT_LOGIN_AND_REGIST, { name: 'Santos', email: 'santos@test.com', password: '1234567'})
+      .then((data) => console.log(data, 'resultado do axios'));
+  }, []);
 
   return (
     // <BrowserRouter>
