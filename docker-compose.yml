@@ -15,32 +15,32 @@ services:
   #     test: ["CMD", "lsof", "-t", "-i:3000"]  # Caso utilize outra porta interna para o front, altere ela aqui também
   #     timeout: 10s
   #     retries: 5
-  backend:
-    build: ./backend
-    container_name: api_backend
-    platform: linux/x86_64
-    restart: 'always'
-    ports:
-      - 3005:3005
-    # command: npm run dev
-    volumes:
-      - './backend/src:/app_backend/src'
-    depends_on:
-      db:
-        condition: service_healthy
-    environment:
-      - PORT=3005
-      # Os dados abaixo se referem ao container `db`
-      # Dica: Relembre aqui da comunicação interna entre containers
-      - DB_USER='${MONGO_USER}'
-      - DB_PASS='${MONGO_PASSWORD}'
-      - DB_HOST='${MONGO_URI}'
-      - DB_NAME=Ebytr
-      - DB_PORT=27017
-    healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:3005"] # Caso utilize outra porta interna para o back, altere ela aqui também
-      timeout: 10s
-      retries: 5
+  # backend:
+  #   build: ./backend
+  #   container_name: api_backend
+  #   platform: linux/x86_64
+  #   restart: 'always'
+  #   ports:
+  #     - 3005:3005
+  #   # command: npm run dev
+  #   volumes:
+  #     - './backend/src:/app_backend/src'
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
+  #   environment:
+  #     - PORT=3005
+  #     # Os dados abaixo se referem ao container `db`
+  #     # Dica: Relembre aqui da comunicação interna entre containers
+  #     - DB_USER='${MONGO_USER}'
+  #     - DB_PASS='${MONGO_PASSWORD}'
+  #     - DB_HOST='${MONGO_URI}'
+  #     - DB_NAME=Ebytr
+  #     - DB_PORT=27017
+  #   healthcheck:
+  #     test: ["CMD", "lsof", "-t", "-i:3005"] # Caso utilize outra porta interna para o back, altere ela aqui também
+  #     timeout: 10s
+  #     retries: 5
   db:
     image: mongo:5.0.6
     container_name: db_mongo

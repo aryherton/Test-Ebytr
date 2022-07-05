@@ -3,8 +3,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export default {
-  user: process.env.MONGO_USER,
-  pass: process.env.MONGO_PASSWORD,
+  user: 'root',
+  pass: 'ary123456',
   autoIndex: false,
-  dbName: process.env.MONGO_DB_CONTAINER,
+  dbName: 'Ebytr',
 };

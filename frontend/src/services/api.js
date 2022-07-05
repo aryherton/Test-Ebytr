@@ -4,10 +4,9 @@ const api = axios.create({
   baseURL: `http://localhost:${process.env.REACT_API_PORT || '3005'}`,
 });
 
-export const requestPost = async (endpoint, body) => {
+export const requestPost = (endpoint, body) => {
   // api.defaults.headers.common.Authorization = token;
-  const { data } = await api.post(endpoint, body);
-  console.log(data, '<<<<<<<<<<<');
+  const { data } = api.post(endpoint, body);
   return data;
 };
 
@@ -16,9 +15,12 @@ export const requestPost = async (endpoint, body) => {
 //   return data;
 // };
 
-export const requestData = async (endpoint) => {
-  const { data } = await api.get(endpoint);
-  return data;
+export const getArrMessages = async (endpoint, token) => {
+  api.defaults.headers.Authorization = token;
+  const data = await api.get(endpoint)
+    .then((resp) => resp.data);
+    // console.log(data, 'ssssssssssssss');
+    return data;
 };
 
 export default api;
